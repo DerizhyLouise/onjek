@@ -9,12 +9,16 @@ const app = express();
 const { logger } = require('./middleware/logger');
 const PORT = 3000;
 
+const {conn} = require("./config/mysql");
+
 // Middleware
 app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger);
+
+// app.use('/api', routes);
 
 app.use('/maincss', (req, res) => {
     res.sendFile(path.join(__dirname, "/public/style/main.css"));
