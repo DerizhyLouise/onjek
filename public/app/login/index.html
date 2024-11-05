@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="maincss">
+    <title>OnJek - Login</title>
+</head>
+
+<body class="bg-black">
+    <div class="h-screen w-screen sm:w-[640px] bg-white mx-auto flex flex-col justify-center">
+        <div class="h-48 flex justify-center items-center flex-col gap-4">
+            <h1 class="text-4xl font-semibold border-4 border-darkgreen p-4">Onjek</h1>
+            <p class="text-6xl font-semibold">Login Here!</p>
+        </div>
+        <form id="loginForm" action="#" method="post" class="grid grid-rows-3 gap-8 w-full mt-4">
+            <div class="grid grid-cols-4 gap-4">
+                <label class="py-4 text-right">Email</label>
+                <input id="email" class="p-2 w-full col-span-2 focus:outline-none border-b-2 border-darkgreen" type="email" placeholder="user@mail.com"></input>
+                <div class="border-l-2 border-darkgreen"></div>
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+                <label class="py-4 text-right">Password</label>
+                <input id="pass" class="p-2 w-full col-span-2 focus:outline-none border-b-2 border-darkgreen" type="password" placeholder="Enter password"></input>
+                <div class="border-l-2 border-darkgreen"></div>
+            </div>
+            <div class="mx-auto">
+                <button type="submit" class="border-2 border-darkgreen p-4 w-24 hover:bg-darkgreen hover:text-white">
+                    Login
+                </button>
+                <a class="ml-2" href="register">Create account?</a>
+            </div>
+        </form>
+        <div>
+    </div>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="main"></script>
+    <script src="loginscript"></script>
+</body>
+
+</html>

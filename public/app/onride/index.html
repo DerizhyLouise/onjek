@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
+  <link rel="stylesheet" href="maincss">
+
+  <title>OnJek - OnRide</title>
+</head>
+
+<body class="bg-black">
+  <div class="w-screen fixed top-0 h-24 bg-black px-12 md:px-40 flex justify-between items-center">
+    <div>
+      <h1 class="text-4xl font-semibold border-4 border-white text-white p-4">Onjek</h1>
+    </div>
+    <div>
+      <button id="profileDD1" data-dropdown-toggle="profileDD2"
+        class="relative overflow-hidden rounded-full bg-cuswhite h-10 w-10">
+        <svg class="absolute w-12 h-12 text-gray-400 -left-1 top-0" fill="currentColor" viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+      <div id="profileDD2" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+        <ul class="py-2 text-sm text-gray-700" aria-labelledby="profileDD1">
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-sage">Profile</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-sage">Settings</a>
+          </li>
+          <li>
+            <a href="login" class="block px-4 py-2 hover:bg-sage">Sign out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="h-24 w-full"></div>
+
+  <div class="bg-white w-screen sm:w-[640px] mx-auto">
+    <div class="h-full py-6 px-10">
+
+      <div class="mt-4">
+        <div class="mb-4 flex gap-6 border-b-2 border-black pb-4">
+          <button class="text-4xl" onclick="window.history.back()">
+            <span class="fa-regular fa-chevron-left"></span>
+          </button>
+          <p class="text-4xl font-semibold">OnRide</p>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <form id="onrideOrderForm" action="#" method="post" class="mb-4 pb-4">
+          <div class="relative w-full mb-4">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+              <span class="fa-regular fa-magnifying-glass"></span>
+            </div>
+            <input type="search" id="destination"
+              class="block w-full p-4 ps-10 text-sm text-gray-900 border border-black rounded-lg focus:outline-none"
+              placeholder="Where to go?" required />
+          </div>
+          <div class="relative w-full mb-4">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+              <span class="fa-regular fa-location-dot"></span>
+            </div>
+            <input type="search" id="departure"
+              class="block w-full p-4 ps-10 text-sm text-gray-900 border border-black rounded-lg focus:outline-none"
+              placeholder="Search for a departure..." value="Current Location" required />
+          </div>
+          <div class="flex justify-end">
+            <button type="submit" data-modal-target="confirm-modal" data-modal-toggle="confirm-modal"
+              class="border-2 border-darkgreen p-4 w-full rounded-lg hover:bg-darkgreen hover:text-white">
+              Find Driver
+            </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <!-- confirm-modal -->
+  <div id="confirm-modal" tabindex="-1" aria-hidden="true"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+      <div class="relative bg-white rounded-lg shadow">
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+          <h3 class="text-xl font-semibold">
+            Your Driver Has Been Found!
+          </h3>
+          <button type="button"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+            data-modal-hide="confirm-modal">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <div class="p-4 md:p-5 space-y-4">
+          <form id="arrivedForm" action="#" method="post">
+            <input type="text" id="arrived" class="hidden" />
+            <p class="text-center">Please click this button when arrived</p>
+            <div class="flex justify-center mt-4">
+              <button data-modal-hide="confirm-modal" type="submit"
+                class="hover:text-white bg-white border border-darkgreen hover:bg-darkgreen px-5 py-2.5 text-center">
+                Arrived!
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+  <script src="main"></script>
+  <script src="onridescript"></script>
+</body>
+
+</html>
