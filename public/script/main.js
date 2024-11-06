@@ -6,13 +6,18 @@ tailwind.config = {
 				darkgreen: "#014421",
 				green: "#355E3B",
 				sage: "#BCB88A",
-				cuswhite: "#FBFBFB"
+				cuswhite: "#FBFBFB",
 			},
 		},
 	},
 };
 
-// const session = sessionStorage.getItem("user");
-// if (!session && !window.location.pathname.startsWith("/app/login") && !window.location.pathname.startsWith("/app/register")) {
-//     window.location.href = "/app/login";
-// }
+const session = sessionStorage.getItem("user_id");
+if (
+	!session &&
+	!window.location.pathname.startsWith("/login") &&
+	!window.location.pathname.startsWith("/register")
+) {
+	alert("Session expired!");
+	window.location.href = "/login";
+}

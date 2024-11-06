@@ -1,13 +1,13 @@
-const express = require('express');
-const { userController } = require('../controllers');
+import express from "express";
+import { userController } from "../controllers/index.js";
+
 const userRoutes = express.Router();
+const API = "/user";
 
-const API = '/user';
+userRoutes.get(API + "/getAllUser", userController.getUsers);
+userRoutes.post(API + "/create", userController.createUser);
+userRoutes.get(API + "/getUserById/:userId", userController.getUserById);
+userRoutes.put(API + "/update", userController.updateUserById);
+userRoutes.put(API + "/login", userController.login);
 
-userRoutes.get(API + '/getAllUser', userController.getUsers);
-userRoutes.post(API + '/create', userController.createUser);
-userRoutes.get(API + '/getUserById/:userId', userController.getUserById);
-userRoutes.put(API +'/update', userController.updateUserById);
-userRoutes.put(API +'/login', userController.login);
-
-module.exports = userRoutes;
+export default userRoutes;

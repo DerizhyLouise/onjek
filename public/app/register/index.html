@@ -9,7 +9,7 @@
     <title>OnJek - Register</title>
 </head>
 
-<body class="bg-green">
+<body class="bg-black">
     <div class="h-screen w-screen sm:w-[640px] bg-white mx-auto flex flex-col justify-center">
         <div class="h-40 flex justify-center items-center flex-col gap-4">
             <h1 class="text-4xl font-semibold border-4 border-darkgreen p-4">Onjek</h1>
@@ -17,23 +17,33 @@
         </div>
         <form id="registerForm" action="#" method="post" class="grid grid-rows-3 gap-8 w-full mt-4">
             <div class="grid grid-cols-4 gap-4">
-                <label class="py-4 text-right">Name</label>
-                <input id="name" class="p-2 w-full col-span-2 focus:outline-none border-b-2 border-darkgreen" type="text" placeholder="Your Name"></input>
+                <label class="py-4 text-right" for="name">Name</label>
+                <input id="name" class="p-2 w-full col-span-2 focus:outline-none border-b-2 border-darkgreen"
+                    type="text" placeholder="Your Name"></input>
                 <div class="border-l-2 border-darkgreen"></div>
             </div>
             <div class="grid grid-cols-4 gap-4">
-                <label class="py-4 text-right">Birthdate</label>
-                <input id="birthdate" class="p-2 w-full col-span-2 focus:outline-none border-b-2 border-darkgreen" type="date"></input>
+                <label class="py-4 text-right" for="birthdate">Birthdate</label>
+                <input id="birthdate" class="p-2 w-full col-span-2 focus:outline-none border-b-2 border-darkgreen"
+                    type="date"></input>
                 <div class="border-l-2 border-darkgreen"></div>
             </div>
             <div class="grid grid-cols-4 gap-4">
-                <label class="py-4 text-right">Email</label>
-                <input id="email" class="p-2 w-full col-span-2 focus:outline-none border-b-2 border-darkgreen" type="email" placeholder="user@mail.com"></input>
+                <label class="py-4 text-right" for="email">Email</label>
+                <input id="email" class="p-2 w-full col-span-2 focus:outline-none border-b-2 border-darkgreen"
+                    type="email" placeholder="user@mail.com"></input>
                 <div class="border-l-2 border-darkgreen"></div>
             </div>
             <div class="grid grid-cols-4 gap-4">
-                <label class="py-4 text-right">Password</label>
-                <input id="pass" class="p-2 w-full col-span-2 focus:outline-none border-b-2 border-darkgreen" type="password" placeholder="Enter password"></input>
+                <label class="py-4 text-right" for="pass">Password</label>
+                <input id="pass" class="p-2 w-full col-span-2 focus:outline-none border-b-2 border-darkgreen"
+                    type="password" placeholder="Enter password"></input>
+                <div class="border-l-2 border-darkgreen"></div>
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+                <label class="py-4 text-right" for="confirmPass">Confirm Pass</label>
+                <input id="confirmPass" class="p-2 w-full col-span-2 focus:outline-none border-b-2 border-darkgreen"
+                    type="password" placeholder="Enter password"></input>
                 <div class="border-l-2 border-darkgreen"></div>
             </div>
             <div class="mx-auto">
@@ -44,11 +54,11 @@
             </div>
         </form>
         <div>
-    </div>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="main"></script>
-    <script src="registerscript"></script>
+        </div>
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="main"></script>
+        <script src="registerscript"></script>
 </body>
 
 </html>

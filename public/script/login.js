@@ -1,37 +1,31 @@
 sessionStorage.clear();
 
-document.getElementById("loginForm").addEventListener("submit", function (event) {
-    event.preventDefault();
-    submitForm();
-});
+document
+	.getElementById("loginForm")
+	.addEventListener("submit", function (event) {
+		event.preventDefault();
+		submitForm();
+	});
 
 async function submitForm() {
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("pass").value;
-    let validUserFound = false;
+	let email = document.getElementById("email").value;
+	let password = document.getElementById("pass").value;
+	let validUserFound = false;
 
-    window.location.href = "/home";
+	let response = await fetch(`http://localhost:3000/api/user/getAllUser`);
+	let data = await response.json();
+	data = data.data;
 
-    // let response1 = await fetch(`https://be-balikpapan-6-production.up.railway.app/api/user/getAllUser`);
-    // let data = await response1.json();
-    // data = data.data;
-
-    // for (let i in data) {
-    //     if (data[i].email === email && data[i].password === password) {
-    //         let response2 = await fetch(`https://be-balikpapan-6-production.up.railway.app/api/customer/getCustomerByUserId/` + data[i].user_id);
-    //         let customer = await response2.json();
-    //         customer = customer.data;
-    //         sessionStorage.clear();
-    //         sessionStorage.setItem('customer_id', customer[0].customer_id);
-    //         window.location.href = "landing.html";
-    //         validUserFound = true;
-    //         break;
-    //     }
-    // }
-    // if (!validUserFound) {
-    //     Swal.fire({
-    //         title: 'Email or Password is invalid',
-    //         icon: 'error',
-    //     });
-    // }
+	for (let i in data) {
+		if (data[i].email === email && data[i].password === password) {
+			sessionStorage.clear();
+			sessionStorage.setItem("user_id", data[i].id);
+			window.location.href = "/home";
+			validUserFound = true;
+			break;
+		}
+	}
+	if (!validUserFound) {
+		alert("Email or password invalid!");
+	}
 }
