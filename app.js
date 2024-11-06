@@ -15,7 +15,6 @@ dotenv.config();
 const app = express();
 const PORT = 3000;
 
-// Middleware
 app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
@@ -56,7 +55,6 @@ app.use("/oncar", (req, res) => {
 	res.sendFile(path.join(__dirname, "/public/app/oncar/index.html"));
 });
 
-// Serve index.html
 app.get("/", (req, res) => {
 	const htmlPath = path.join(__dirname, "/public/app/home/index.html");
 	fs.readFile(htmlPath, "utf8", (err, data) => {

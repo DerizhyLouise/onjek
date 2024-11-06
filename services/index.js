@@ -1,3 +1,4 @@
+import accountService from "./accountService.js";
 import userService from "./userService.js";
 
-export { userService };
+export { accountService, userService };

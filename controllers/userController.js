@@ -1,4 +1,4 @@
-import { userService } from "../services/index.js";
+import { accountService, userService } from "../services/index.js";
 
 async function getUsers(req, res) {
 	try {
@@ -32,11 +32,19 @@ async function getUserById(req, res) {
 
 async function createUser(req, res) {
 	try {
-		const userId = await userService.createUser(req.body);
-		res.status(201).json({ userId });
+		const userResult = await userService.createUser(req.body);
+		const userId = userResult.insertId;
+		const accountResult = await accountService.createAccount(userId);
+
+		res.status(201).json({
+			userId: userId,
+			accountCode: accountResult.insertId,
+		});
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: "Failed to create new user" });
+		res.status(500).json({
+			error: "Failed to create new user and account",
+		});
 	}
 }
 
