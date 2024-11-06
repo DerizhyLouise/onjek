@@ -1,4 +1,5 @@
 import { conn } from "../config/mysql.js";
+import { User } from "../models/index.js";
 
 async function getUsers() {
 	try {
@@ -8,7 +9,8 @@ async function getUsers() {
 					console.error(err);
 					reject("Error fetching users");
 				}
-				resolve(results);
+				const users = results.map(row => new User(row.id, row.name, row.birthdate, row.email, row.password));
+				resolve(users);
 			});
 		});
 	} catch (error) {
@@ -27,7 +29,8 @@ async function getUserById(userId) {
 						console.error(err);
 						reject("Error fetching user by ID");
 					}
-					resolve(results[0]);
+					const user = results[0] ? new User(results[0].id, results[0].name, results[0].birthdate, results[0].email, results[0].password) : null;
+					resolve(user);
 				}
 			);
 		});
@@ -38,6 +41,9 @@ async function getUserById(userId) {
 }
 
 async function createUser(user) {
+	if (!(user instanceof User)) {
+		throw new Error("Expected a User instance");
+	}
 	try {
 		return new Promise((resolve, reject) => {
 			const { name, birthdate, email, password } = user;
@@ -47,9 +53,11 @@ async function createUser(user) {
 				(err, results) => {
 					if (err) {
 						console.error(err);
-						reject("Error creating user");
+						throw new Error(err);
+					} else {
+						const newUser = new User(results.insertId, name, birthdate, email, password);
+						resolve(newUser);
 					}
-					resolve(results);
 				}
 			);
 		});
@@ -60,6 +68,9 @@ async function createUser(user) {
 }
 
 async function updateUserById(userId, updatedUser) {
+	if (!(updatedUser instanceof User)) {
+		throw new Error("Expected a User instance");
+	}
 	try {
 		return new Promise((resolve, reject) => {
 			const { name, birthdate, email, password } = updatedUser;

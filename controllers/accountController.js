@@ -17,10 +17,13 @@ async function getAccountByUserId(req, res) {
 	}
 }
 
-async function updateAccountBalance(req, res) {
+async function topup(req, res) {
 	const userId = req.body.user_id;
+	let balance = req.body.balance;
 	try {
-		await accountService.updateAccountBalance(userId);
+		const account = await accountService.getAccountById(userId);
+		balance = balance + parseFloat(account.balance);
+		await accountService.updateAccountBalance(userId, balance);
 		res.status(200).json({
 			message: "Successfully update account's balance",
 		});
@@ -32,4 +35,4 @@ async function updateAccountBalance(req, res) {
 	}
 }
 
-export default { getAccountByUserId, updateAccountBalance };
+export default { getAccountByUserId, topup };

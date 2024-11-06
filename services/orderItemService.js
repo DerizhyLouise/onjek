@@ -1,67 +1,80 @@
-const { prisma } = require('../config/prisma.js');
+import { conn } from "../config/mysql.js";
+import { OnCarOrder } from "../models/index.js";
 
-async function getOrderItemById (orderItemId) {
-    try {
-        const orderItem = await prisma.order_item.findMany({
-            where: {
-                order_item_id: Number(orderItemId),
-            }
-        })
-        return orderItem
-    } catch (error) {
-        throw new Error(error)
-    }
+async function getAccountById(userId) {
+	try {
+		return new Promise((resolve, reject) => {
+			conn.query(
+				"SELECT * FROM account WHERE user_id = ?",
+				[userId],
+				(err, results) => {
+					if (err) {
+						console.error(err);
+						reject("Error fetching account by User ID");
+					}
+					if (results.length === 0) {
+						resolve(null);
+					} else {
+						const { id, user_id, account_code, balance } = results[0];
+						const account = new Account(id, user_id, account_code, balance);
+						resolve(account);
+					}
+				}
+			);
+		});
+	} catch (error) {
+		console.error(error);
+		throw new Error(error);
+	}
 }
 
-async function getOrderItemsByOrderId (orderId) {
-    try {
-        const orderItem = await prisma.order_item.findMany({
-            where: {
-                order_id: Number(orderId),
-                defunct_ind: 'N'
-            }
-        })
-        return orderItem
-    } catch (error) {
-        throw new Error(error)
-    }
+async function createAccount(userId) {
+	try {
+		return new Promise((resolve, reject) => {
+			const accountCode =
+				"AC" + Math.random().toString(36).substr(2, 10).toUpperCase();
+			conn.query(
+				"INSERT INTO account (user_id, account_code, balance) VALUES (?, ?, ?)",
+				[userId, accountCode, 0.0],
+				(err, results) => {
+					if (err) {
+						console.error(err);
+						reject("Error creating account");
+					} else {
+						const account = new Account(results.insertId, userId, accountCode, 0.0);
+						resolve(account);
+					}
+				}
+			);
+		});
+	} catch (error) {
+		console.error(error);
+		throw new Error(error);
+	}
 }
 
-async function createOrderItem(orderItem) {
-    try {
-        const createdOrderItem = await prisma.order_item.create({
-            data: {
-                product_id: orderItem.product_id,
-                order_id: orderItem.order_id,
-                order_qty: orderItem.order_qty,
-                defunct_ind: 'N'
-            }
-        })
-        return createdOrderItem;
-    } catch (error) {
-        throw new Error(error)
-    }
+async function updateAccountBalance(userId, balance) {
+	try {
+		return new Promise((resolve, reject) => {
+			conn.query(
+				"UPDATE account SET balance = ? WHERE user_id = ?",
+				[balance, userId],
+				(err, results) => {
+					if (err) {
+						console.error(err);
+						reject("Error updating account balance");
+					}
+					if (results.affectedRows === 0) {
+						reject("No account found for the given user ID");
+					}
+					resolve(results);
+				}
+			);
+		});
+	} catch (error) {
+		console.error(error);
+		throw new Error(error);
+	}
 }
 
-async function deleteOrderItem(orderItemId) {
-    try {
-        const orderItem = await prisma.order_item.update({
-            where: {
-                order_item_id: orderItemId
-            },
-            data: {
-                defunct_ind: 'Y'
-            }
-        });
-        return orderItem;
-    } catch (error) {
-        throw new Error(error)
-    }
-}
-
-module.exports = {
-    getOrderItemById,
-    getOrderItemsByOrderId,
-    createOrderItem,
-    deleteOrderItem
-};
+export default { getAccountById, createAccount, updateAccountBalance };

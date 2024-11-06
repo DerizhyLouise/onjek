@@ -5,9 +5,9 @@ const accountRoutes = express.Router();
 const API = "/account";
 
 accountRoutes.get(
-	API + "/getUserById/:userId",
+	API + "/getAccountByUserId/:userId",
 	accountController.getAccountByUserId
 );
-accountRoutes.put(API + "/update", accountController.updateAccountBalance);
+accountRoutes.put(API + "/topup", accountController.topup);
 
 export default accountRoutes;

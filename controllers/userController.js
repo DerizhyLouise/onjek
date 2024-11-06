@@ -1,4 +1,5 @@
 import { accountService, userService } from "../services/index.js";
+import { User } from "../models/index.js"
 
 async function getUsers(req, res) {
 	try {
@@ -32,13 +33,15 @@ async function getUserById(req, res) {
 
 async function createUser(req, res) {
 	try {
-		const userResult = await userService.createUser(req.body);
-		const userId = userResult.insertId;
-		const accountResult = await accountService.createAccount(userId);
+		const { name, birthdate, email, password } = req.body;
+		const newUser = new User(null, name, birthdate, email, password);
+
+		const userResult = await userService.createUser(newUser);
+		const accountResult = await accountService.createAccount(userResult.id);
 
 		res.status(201).json({
-			userId: userId,
-			accountCode: accountResult.insertId,
+			userId: userResult.id,
+			accountCode: accountResult.accountCode,
 		});
 	} catch (error) {
 		console.error(error);
@@ -56,25 +59,14 @@ async function updateUserById(req, res) {
 			return res.status(404).json({ error: "User not found" });
 		}
 
-		if (req.body.name && req.body.name !== user.name) {
-			user.name = req.body.name;
-		}
-
-		if (req.body.birthdate && req.body.birthdate !== user.birthdate) {
-			user.birthdate = req.body.birthdate;
-		}
-
-		if (req.body.email && req.body.email !== user.email) {
-			user.email = req.body.email;
-		}
-
-		if (req.body.password && req.body.password !== user.password) {
-			user.password = req.body.password;
-		}
+		if (req.body.name) user.name = req.body.name;
+		if (req.body.birthdate) user.birthdate = req.body.birthdate;
+		if (req.body.email) user.email = req.body.email;
+		if (req.body.password) user.password = req.body.password;
 
 		await userService.updateUserById(userId, user);
 		res.status(200).json({
-			message: "Successfully update user",
+			message: "Successfully updated user",
 		});
 	} catch (error) {
 		console.error(error);

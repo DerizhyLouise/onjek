@@ -21,16 +21,20 @@ async function submitForm() {
 	json.email = email;
 	json.password = password;
 
-	await fetch(`http://localhost:3000/api/user/create`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(json),
-	});
+	try {
+		await fetch(`http://localhost:3000/api/user/create`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(json),
+		});
+		alert("Account created!");
+		window.location.href = "/login";
+	} catch (err) {
+		alert("Failed to create account");
+	}
 
-	alert("Account created!");
-	window.location.href = "/login";
 }
 
 const passwordInput = document.getElementById("pass");

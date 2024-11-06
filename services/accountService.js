@@ -1,4 +1,5 @@
 import { conn } from "../config/mysql.js";
+import { Account } from "../models/index.js";
 
 async function getAccountById(userId) {
 	try {
@@ -11,7 +12,13 @@ async function getAccountById(userId) {
 						console.error(err);
 						reject("Error fetching account by User ID");
 					}
-					resolve(results[0]);
+					if (results.length === 0) {
+						resolve(null);
+					} else {
+						const { id, user_id, account_code, balance } = results[0];
+						const account = new Account(id, user_id, account_code, balance);
+						resolve(account);
+					}
 				}
 			);
 		});
@@ -33,8 +40,10 @@ async function createAccount(userId) {
 					if (err) {
 						console.error(err);
 						reject("Error creating account");
+					} else {
+						const account = new Account(results.insertId, userId, accountCode, 0.0);
+						resolve(account);
 					}
-					resolve(results);
 				}
 			);
 		});
