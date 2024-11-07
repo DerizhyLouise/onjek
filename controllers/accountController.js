@@ -35,4 +35,39 @@ async function topup(req, res) {
 	}
 }
 
-export default { getAccountByUserId, topup };
+async function transfer(req, res) {
+	const userId = req.body.user_id;
+	let nominal = req.body.nominal;
+	let balance = req.body.nominal;
+	let accountCode = req.body.accountCode;
+	try {
+		const account = await accountService.getAccountById(userId);
+		const targetAccount = await accountService.getAccountByCode(accountCode);
+		if (!targetAccount) {
+			return res.json({
+				message: "Transfer Account Code Not Found!",
+			});
+		}
+
+		balance = account.balance - parseFloat(balance);
+		if (balance < 0) {
+			return res.json({
+				message: "Transfer failed! Check your balance!",
+			});
+		}
+		nominal = nominal + parseFloat(targetAccount.balance);
+
+		await accountService.updateAccountBalance(userId, balance);
+		await accountService.updateAccountBalance(targetAccount.userId, nominal);
+		res.status(200).json({
+			message: "Successfully update account's balance",
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({
+			error: "Transfer failed",
+		});
+	}
+}
+
+export default { getAccountByUserId, topup, transfer };

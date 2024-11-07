@@ -9,5 +9,6 @@ accountRoutes.get(
 	accountController.getAccountByUserId
 );
 accountRoutes.put(API + "/topup", accountController.topup);
+accountRoutes.put(API + "/transfer", accountController.transfer);
 
 export default accountRoutes;

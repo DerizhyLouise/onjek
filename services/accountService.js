@@ -28,6 +28,33 @@ async function getAccountById(userId) {
 	}
 }
 
+async function getAccountByCode(code) {
+	try {
+		return new Promise((resolve, reject) => {
+			conn.query(
+				"SELECT * FROM account WHERE account_code = ?",
+				[code],
+				(err, results) => {
+					if (err) {
+						console.error(err);
+						reject("Error fetching account by Account Code");
+					}
+					if (results.length === 0) {
+						resolve(null);
+					} else {
+						const { id, user_id, account_code, balance } = results[0];
+						const account = new Account(id, user_id, account_code, balance);
+						resolve(account);
+					}
+				}
+			);
+		});
+	} catch (error) {
+		console.error(error);
+		throw new Error(error);
+	}
+}
+
 async function createAccount(userId) {
 	try {
 		return new Promise((resolve, reject) => {
@@ -77,4 +104,4 @@ async function updateAccountBalance(userId, balance) {
 	}
 }
 
-export default { getAccountById, createAccount, updateAccountBalance };
+export default { getAccountById, getAccountByCode, createAccount, updateAccountBalance };
