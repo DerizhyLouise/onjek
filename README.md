@@ -11,5 +11,4 @@ Fitur:
 
 Step By Step:
 1. Lakukan npm install pada console
-2. Buka file /db/query.sql dan copy dan paste query dan jalankan pada MySQL
-3. Lakukan node app pada console
+2. Lakukan node app pada console
