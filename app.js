@@ -38,6 +38,9 @@ app.use("/loginscript", (req, res) => {
 app.use("/registerscript", (req, res) => {
 	res.sendFile(path.join(__dirname, "/public/script/register.js"));
 });
+app.use("/food", (req, res) => {
+	res.sendFile(path.join(__dirname, "/public/assets/food.jpg"));
+});
 
 app.use("/home", (req, res) => {
 	res.sendFile(path.join(__dirname, "/public/app/home/index.html"));
@@ -53,6 +56,12 @@ app.use("/onride", (req, res) => {
 });
 app.use("/oncar", (req, res) => {
 	res.sendFile(path.join(__dirname, "/public/app/oncar/index.html"));
+});
+app.use("/shop", (req, res) => {
+	res.sendFile(path.join(__dirname, "/public/app/shop/index.html"));
+});
+app.use("/product", (req, res) => {
+	res.sendFile(path.join(__dirname, "/public/app/product/index.html"));
 });
 
 app.get("/", (req, res) => {

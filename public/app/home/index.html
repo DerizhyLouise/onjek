@@ -13,7 +13,7 @@
 <body class="bg-black">
   <div class="w-screen fixed top-0 h-24 bg-black px-12 md:px-40 flex justify-between items-center">
     <div>
-      <h1 class="text-4xl font-semibold border-4 border-white text-white p-4">Onjek</h1>
+      <h1 class="text-4xl font-semibold border-4 border-white text-white p-4">OnJek</h1>
     </div>
     <div>
       <button id="profileDD1" data-dropdown-toggle="profileDD2"
@@ -41,12 +41,12 @@
 
   <div class="h-24 w-full"></div>
 
-  <div class="bg-white min-h-screen w-screen sm:w-[640px] mx-auto">
+  <div class="bg-white min-h-[calc(100vh - 96px)] w-screen sm:w-[640px] mx-auto">
     <div class="h-full py-6 px-10">
-      
+
       <div class="border border-gray-300 shadow-lg rounded-lg p-6 flex justify-between">
         <div class="flex gap-2">
-          <label class="flex items-center text-3xl">
+          <label class="flex items-center text-3xl" for="accountBalance">
             <span class="fa-regular fa-money-bill"></span>
           </label>
           <input id="accountBalance" class="focus:outline-none text-2xl w-full" disabled></input>
@@ -111,30 +111,10 @@
       <div class="mt-10">
         <div class="mb-4 flex justify-between">
           <p class="text-xl font-semibold">Recommended Food</p>
-          <button class="text-xl font-semibold border-2 border-black hover:bg-black hover:text-white rounded-lg px-2">More</button>
+          <a href="/shop"
+            class="text-xl font-semibold border-2 border-black hover:bg-black hover:text-white rounded-lg px-2">More</a>
         </div>
-        <div class="flex justify-between flex-wrap items">
-          <div class="mb-4 h-40 w-40 bg-black"></div>
-          <div class="mb-4 h-40 w-40 bg-black"></div>
-          <div class="mb-4 h-40 w-40 bg-black"></div>
-          <div class="mb-4 h-40 w-40 bg-black"></div>
-          <div class="mb-4 h-40 w-40 bg-black"></div>
-          <div class="mb-4 h-40 w-40 bg-black"></div>
-        </div>
-      </div>
-      <div class="mt-10">
-        <div class="mb-4 flex justify-between">
-          <p class="text-xl font-semibold">Recommended Mart</p>
-          <button class="text-xl font-semibold border-2 border-black hover:bg-black hover:text-white rounded-lg px-2">More</button>
-        </div>
-        <div class="flex justify-between flex-wrap items">
-          <div class="mb-4 h-40 w-40 bg-black"></div>
-          <div class="mb-4 h-40 w-40 bg-black"></div>
-          <div class="mb-4 h-40 w-40 bg-black"></div>
-          <div class="mb-4 h-40 w-40 bg-black"></div>
-          <div class="mb-4 h-40 w-40 bg-black"></div>
-          <div class="mb-4 h-40 w-40 bg-black"></div>
-        </div>
+        <div class="flex justify-between flex-wrap items" id="shopList"></div>
       </div>
     </div>
   </div>
@@ -161,7 +141,8 @@
         <div class="p-4 md:p-5 space-y-4">
           <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div>
-              <label for="transferCode" class="block mb-2 text-sm font-medium text-gray-900">Transfer Account Code</label>
+              <label for="transferCode" class="block mb-2 text-sm font-medium text-gray-900">Transfer Account
+                Code</label>
               <input type="text" id="transferCode"
                 class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5"
                 placeholder="0000000000" required />
@@ -174,8 +155,7 @@
             </div>
           </div>
         </div>
-        <div
-          class="flex justify-center items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
+        <div class="flex justify-center items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
           <button data-modal-hide="tf-modal" type="submit"
             class="hover:text-white bg-white border border-darkgreen hover:bg-darkgreen px-5 py-2.5 text-center">Proceed</button>
         </div>
@@ -212,8 +192,7 @@
             </div>
           </div>
         </div>
-        <div
-          class="flex justify-center items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
+        <div class="flex justify-center items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
           <button data-modal-hide="topup-modal" type="submit"
             class="hover:text-white bg-white border border-darkgreen hover:bg-darkgreen px-5 py-2.5 text-center">Proceed</button>
         </div>
@@ -243,7 +222,8 @@
         <div class="p-4 md:p-5 space-y-4">
           <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div>
-              <p class="block mb-2 text-sm font-medium text-gray-900">Your account code is <span id="accountCode"></span></p>
+              <p class="block mb-2 text-sm font-medium text-gray-900">Your account code is <span
+                  id="accountCode"></span></p>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import accountService from "./accountService.js";
-import userService from "./userService.js";
+import foodService from "./foodService.js";
 import orderService from "./orderService.js";
+import userService from "./userService.js";
 
-export { accountService, userService, orderService };
+export { accountService, foodService, orderService, userService };

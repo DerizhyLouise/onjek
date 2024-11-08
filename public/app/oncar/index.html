@@ -13,7 +13,7 @@
 <body class="bg-black">
   <div class="w-screen fixed top-0 h-24 bg-black px-12 md:px-40 flex justify-between items-center">
     <div>
-      <h1 class="text-4xl font-semibold border-4 border-white text-white p-4">Onjek</h1>
+      <h1 class="text-4xl font-semibold border-4 border-white text-white p-4">OnJek</h1>
     </div>
     <div>
       <button id="profileDD1" data-dropdown-toggle="profileDD2"
@@ -184,7 +184,7 @@
         const data = await response.json();
         console.log(data)
 
-        document.getElementById("orderId").value = data.onCar .id;
+        document.getElementById("orderId").value = data.onCar.id;
         if (response.ok) {
           console.log("Order created:", data);
         } else {

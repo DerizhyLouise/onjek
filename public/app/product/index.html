@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
+  <link rel="stylesheet" href="maincss">
+
+  <title>OnJek - OnFood</title>
+</head>
+
+<body class="bg-black">
+  <div class="w-screen fixed top-0 h-24 bg-black px-12 md:px-40 flex justify-between items-center">
+    <div>
+      <h1 class="text-4xl font-semibold border-4 border-white text-white p-4">OnJek</h1>
+    </div>
+    <div>
+      <button id="profileDD1" data-dropdown-toggle="profileDD2"
+        class="relative overflow-hidden rounded-full bg-cuswhite h-10 w-10">
+        <svg class="absolute w-12 h-12 text-gray-400 -left-1 top-0" fill="currentColor" viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+      <div id="profileDD2" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+        <ul class="py-2 text-sm text-gray-700" aria-labelledby="profileDD1">
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-sage">Profile</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-sage">Settings</a>
+          </li>
+          <li>
+            <a href="login" class="block px-4 py-2 hover:bg-sage">Sign out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="h-24 w-full"></div>
+
+  <div class="bg-white w-screen sm:w-[640px] mx-auto">
+    <div class="h-full py-6 px-10">
+      <div class="mt-4">
+        <div class="mb-4 flex gap-6 border-b-2 border-black pb-4">
+          <button class="text-4xl" onclick="window.history.back()">
+            <span class="fa-regular fa-chevron-left"></span>
+          </button>
+          <p class="text-4xl font-semibold">OnFood</p>
+        </div>
+      </div>
+      <div id="productList" class="grid grid-cols-3 gap-4"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+  <script src="main"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+      loadProducts();
+    });
+
+    async function loadProducts() {
+      try {
+        const shopId = sessionStorage.getItem("shop_id");
+        const response = await fetch(`http://localhost:3000/api/food/getAllFoodProduct/${shopId}`);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+
+        const products = await response.json();
+        const productList = document.getElementById("productList");
+
+        productList.innerHTML = "";
+
+        products.data.forEach((product) => {
+          const productDiv = document.createElement("div");
+          productDiv.className =
+            "mb-4 h-68 w-44 bg-white shadow-md rounded-lg text-center p-4 flex flex-col justify-start items-center";
+
+          productDiv.innerHTML = `
+            <img src="/food" 
+              alt="${product.name}" class="h-24 w-24 object-cover mb-3 rounded-full border-2 border-gray-300"/>
+            <h3 class="text-lg font-semibold text-gray-800 mb-1">${product.name}</h3>
+            <p class="text-sm text-gray-600 mb-1">${product.description || "No description available"}</p>
+            <p class="text-sm text-green-600 font-medium">Price: Rp${product.price}</p>
+          `;
+
+          productList.appendChild(productDiv);
+        });
+      } catch (error) {
+        console.error("Error loading products:", error);
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,15 +1,15 @@
 class User {
-    constructor(id, name, birthdate, email, password) {
-        this.id = id;
-        this.name = name;
-        this.birthdate = birthdate;
-        this.email = email;
-        this.password = password;
-    }
+	constructor(id, name, birthdate, email, password) {
+		this.id = id;
+		this.name = name;
+		this.birthdate = birthdate;
+		this.email = email;
+		this.password = password;
+	}
 }
 
 class Account {
-	constructor(id, userId, accountCode, balance = 0.00) {
+	constructor(id, userId, accountCode, balance = 0.0) {
 		this.id = id;
 		this.userId = userId;
 		this.accountCode = accountCode;
@@ -34,10 +34,36 @@ class OnRideOrder extends Order {
 }
 
 class OnCarOrder extends Order {
-	constructor(id, userId, startPoint, endPoint, arrivedIndicator = false, capacity) {
+	constructor(
+		id,
+		userId,
+		startPoint,
+		endPoint,
+		arrivedIndicator = false,
+		capacity
+	) {
 		super(id, userId, startPoint, endPoint, arrivedIndicator);
 		this.capacity = capacity;
 	}
 }
 
-export { User, Account, Order, OnRideOrder, OnCarOrder };
+class Shop {
+	constructor(id, name, address, rating = 0.0) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.rating = rating;
+	}
+}
+
+class Product {
+	constructor(id, shopId, name, description, price) {
+		this.id = id;
+		this.shopId = shopId;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+	}
+}
+
+export { Account, OnCarOrder, OnRideOrder, Order, Product, Shop, User };

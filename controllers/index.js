@@ -1,5 +1,6 @@
 import accountController from "./accountController.js";
-import userController from "./userController.js";
+import foodController from "./foodController.js";
 import orderController from "./orderController.js";
+import userController from "./userController.js";
 
-export { accountController, userController, orderController };
+export { accountController, foodController, orderController, userController };
