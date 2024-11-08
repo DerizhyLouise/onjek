@@ -1,118 +1,94 @@
-import { conn } from "../config/mysql.js";
-import { User } from "../models/index.js";
+import fs from 'fs/promises';
+import path from 'path';
+import { User } from '../models/index.js';
+import { v4 as uuidv4 } from 'uuid';
+
+const dbPath = path.resolve('db', 'user.json');
+
+async function readJsonFile(filePath) {
+	try {
+		const data = await fs.readFile(filePath, 'utf-8');
+		return JSON.parse(data);
+	} catch (error) {
+		console.error(`Error reading file from disk: ${error}`);
+		return [];
+	}
+}
+
+async function writeJsonFile(filePath, data) {
+	try {
+		await fs.writeFile(filePath, JSON.stringify(data, null, 2));
+	} catch (error) {
+		console.error(`Error writing file to disk: ${error}`);
+	}
+}
 
 async function getUsers() {
 	try {
-		return new Promise((resolve, reject) => {
-			conn.query("SELECT * FROM user", (err, results) => {
-				if (err) {
-					console.error(err);
-					reject("Error fetching users");
-				}
-				const users = results.map(row => new User(row.id, row.name, row.birthdate, row.email, row.password));
-				resolve(users);
-			});
-		});
+		const usersData = await readJsonFile(dbPath);
+		return usersData.map(user => new User(user.id, user.name, user.birthdate, user.email, user.password));
 	} catch (error) {
-		console.error(error);
+		console.error('Error fetching users:', error);
+		throw new Error('Error fetching users');
 	}
 }
 
 async function getUserById(userId) {
 	try {
-		return new Promise((resolve, reject) => {
-			conn.query(
-				"SELECT * FROM user WHERE id = ?",
-				[userId],
-				(err, results) => {
-					if (err) {
-						console.error(err);
-						reject("Error fetching user by ID");
-					}
-					const user = results[0] ? new User(results[0].id, results[0].name, results[0].birthdate, results[0].email, results[0].password) : null;
-					resolve(user);
-				}
-			);
-		});
+		const usersData = await readJsonFile(dbPath);
+		const user = usersData.find(user => user.id === userId);
+		return user ? new User(user.id, user.name, user.birthdate, user.email, user.password) : null;
 	} catch (error) {
-		console.error(error);
-		throw new Error(error);
+		console.error('Error fetching user by ID:', error);
+		throw new Error('Error fetching user by ID');
 	}
 }
 
 async function createUser(user) {
 	if (!(user instanceof User)) {
-		throw new Error("Expected a User instance");
+		throw new Error('Expected a User instance');
 	}
 	try {
-		return new Promise((resolve, reject) => {
-			const { name, birthdate, email, password } = user;
-			conn.query(
-				"INSERT INTO user (name, birthdate, email, password) VALUES (?, ?, ?, ?)",
-				[name, birthdate, email, password],
-				(err, results) => {
-					if (err) {
-						console.error(err);
-						throw new Error(err);
-					} else {
-						const newUser = new User(results.insertId, name, birthdate, email, password);
-						resolve(newUser);
-					}
-				}
-			);
-		});
+		const usersData = await readJsonFile(dbPath);
+		const newUser = { ...user, id: uuidv4() };
+		usersData.push(newUser);
+		await writeJsonFile(dbPath, usersData);
+		return new User(newUser.id, newUser.name, newUser.birthdate, newUser.email, newUser.password);
 	} catch (error) {
-		console.error(error);
-		throw new Error(error);
+		console.error('Error creating user:', error);
+		throw new Error('Error creating user');
 	}
 }
 
 async function updateUserById(userId, updatedUser) {
 	if (!(updatedUser instanceof User)) {
-		throw new Error("Expected a User instance");
+		throw new Error('Expected a User instance');
 	}
 	try {
-		return new Promise((resolve, reject) => {
-			const { name, birthdate, email, password } = updatedUser;
-			conn.query(
-				"UPDATE user SET name = ?, birthdate = ?, email = ?, password = ? WHERE id = ?",
-				[name, birthdate, email, password, userId],
-				(err, results) => {
-					if (err) {
-						console.error(err);
-						reject("Error updating user");
-					}
-					resolve(results);
-				}
-			);
-		});
+		const usersData = await readJsonFile(dbPath);
+		const userIndex = usersData.findIndex(user => user.id === userId);
+
+		if (userIndex === -1) {
+			throw new Error('User not found');
+		}
+
+		usersData[userIndex] = { ...usersData[userIndex], ...updatedUser };
+		await writeJsonFile(dbPath, usersData);
+		return usersData[userIndex];
 	} catch (error) {
-		console.error(error);
-		throw new Error(error);
+		console.error('Error updating user:', error);
+		throw new Error('Error updating user');
 	}
 }
 
 async function login(email, password) {
 	try {
-		return new Promise((resolve, reject) => {
-			conn.query(
-				"SELECT id, email, name FROM user WHERE email = ? AND password = ?",
-				[email, password],
-				(err, results) => {
-					if (err) {
-						console.error(err);
-						reject("Error during login");
-					}
-					if (results.length === 0) {
-						resolve(null);
-					}
-					resolve(results[0]);
-				}
-			);
-		});
+		const usersData = await readJsonFile(dbPath);
+		const user = usersData.find(user => user.email === email && user.password === password);
+		return user ? { id: user.id, email: user.email, name: user.name } : null;
 	} catch (error) {
-		console.error(error);
-		throw new Error(error);
+		console.error('Error during login:', error);
+		throw new Error('Error during login');
 	}
 }
 

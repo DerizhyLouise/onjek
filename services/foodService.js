@@ -1,61 +1,40 @@
-import { conn } from "../config/mysql.js";
-import { Product, Shop } from "../models/index.js";
+import fs from 'fs/promises';
+import path from 'path';
+import { Product, Shop } from '../models/index.js';
+
+const shopDbPath = path.resolve('db', 'shop.json');
+const productDbPath = path.resolve('db', 'product.json');
+
+async function readJsonFile(filePath) {
+	try {
+		const data = await fs.readFile(filePath, 'utf-8');
+		return JSON.parse(data);
+	} catch (error) {
+		console.error(`Error reading file from disk: ${error}`);
+		return [];
+	}
+}
 
 async function getAllFoodShop() {
 	try {
-		return new Promise((resolve, reject) => {
-			conn.query("SELECT * FROM shop", (err, results) => {
-				if (err) {
-					console.error(err);
-					reject("Error fetching all food shops");
-				} else if (results.length === 0) {
-					resolve([]);
-				} else {
-					const shops = results.map(
-						({ id, name, address, rating }) =>
-							new Shop(id, name, address, rating)
-					);
-					resolve(shops);
-				}
-			});
-		});
+		const shopsData = await readJsonFile(shopDbPath);
+		return shopsData.map(({ id, name, address, rating }) => new Shop(id, name, address, rating));
 	} catch (error) {
-		console.error(error);
-		throw new Error(error);
+		console.error("Error fetching all food shops:", error);
+		throw new Error("Error fetching all food shops");
 	}
 }
 
 async function getAllFoodProduct(shopId) {
 	try {
-		return new Promise((resolve, reject) => {
-			conn.query(
-				"SELECT * FROM product WHERE shop_id = ?",
-				[shopId],
-				(err, results) => {
-					if (err) {
-						console.error(err);
-						reject("Error fetching all food products");
-					} else if (results.length === 0) {
-						resolve([]);
-					} else {
-						const products = results.map(
-							({ id, shop_id, name, description, price }) =>
-								new Product(
-									id,
-									shop_id,
-									name,
-									description,
-									price
-								)
-						);
-						resolve(products);
-					}
-				}
-			);
-		});
+		const productsData = await readJsonFile(productDbPath);
+		const filteredProducts = productsData.filter(product => product.shopId == shopId);
+		return filteredProducts.map(({ id, shopId, name, description, price }) =>
+			new Product(id, shopId, name, description, price)
+		);
 	} catch (error) {
-		console.error("Error in getAllFoodProduct:", error);
-		throw new Error(error);
+		console.error("Error fetching all food products:", error);
+		throw new Error("Error fetching all food products");
 	}
 }
 

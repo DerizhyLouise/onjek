@@ -65,7 +65,7 @@
 
     async function loadProducts() {
       try {
-        const shopId = sessionStorage.getItem("shop_id");
+        const shopId = sessionStorage.getItem("shopId");
         const response = await fetch(`http://localhost:3000/api/food/getAllFoodProduct/${shopId}`);
 
         if (!response.ok) {

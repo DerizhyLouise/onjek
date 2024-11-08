@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "name": "Gourmet Kitchen",
+        "address": "123 Main St",
+        "rating": 4.5
+    },
+    {
+        "id": 2,
+        "name": "Fast Bites",
+        "address": "456 Oak Ave",
+        "rating": 4.2
+    },
+    {
+        "id": 3,
+        "name": "Green Leaf Cafe",
+        "address": "789 Maple Rd",
+        "rating": 4.8
+    },
+    {
+        "id": 4,
+        "name": "Sunshine Deli",
+        "address": "101 Pine St",
+        "rating": 4.3
+    },
+    {
+        "id": 5,
+        "name": "Urban Eats",
+        "address": "202 Elm St",
+        "rating": 4.1
+    },
+    {
+        "id": 6,
+        "name": "Seafood Delight",
+        "address": "303 Ocean Dr",
+        "rating": 4.7
+    },
+    {
+        "id": 7,
+        "name": "Pizza Paradise",
+        "address": "404 Willow St",
+        "rating": 4.6
+    },
+    {
+        "id": 8,
+        "name": "Burger Bonanza",
+        "address": "505 Cedar Ave",
+        "rating": 4.4
+    },
+    {
+        "id": 9,
+        "name": "Sushi Central",
+        "address": "606 Birch Ln",
+        "rating": 4.9
+    },
+    {
+        "id": 10,
+        "name": "Taco Town",
+        "address": "707 Spruce Blvd",
+        "rating": 4.0
+    }
+]

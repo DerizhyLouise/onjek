@@ -52,7 +52,7 @@ async function createUser(req, res) {
 }
 
 async function updateUserById(req, res) {
-	const userId = req.body.user_id;
+	const userId = req.body.userId;
 	try {
 		const user = await userService.getUserById(userId);
 		if (!user) {

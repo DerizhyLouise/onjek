@@ -4,7 +4,6 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import routes from "./routes/index.js";
-// import { conn } from "./config/mysql.js";
 import { fileURLToPath } from "url";
 import { logger } from "./middleware/logger.js";
 

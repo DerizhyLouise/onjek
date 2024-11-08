@@ -1,0 +1,242 @@
+[
+    {
+        "shopId": 1,
+        "name": "Pasta Carbonara",
+        "description": "Classic pasta with creamy sauce",
+        "price": 25000
+    },
+    {
+        "shopId": 1,
+        "name": "Caesar Salad",
+        "description": "Fresh salad with homemade dressing",
+        "price": 30000
+    },
+    {
+        "shopId": 2,
+        "name": "Cheeseburger",
+        "description": "Grilled burger with cheddar cheese",
+        "price": 45000
+    },
+    {
+        "shopId": 1,
+        "name": "Margherita Pizza",
+        "description": "Classic pizza with tomatoes and mozzarella",
+        "price": 35000
+    },
+    {
+        "shopId": 1,
+        "name": "Tiramisu",
+        "description": "Layered dessert with coffee flavor",
+        "price": 45000
+    },
+    {
+        "shopId": 1,
+        "name": "Garlic Bread",
+        "description": "Toasted bread with garlic and herbs",
+        "price": 15000
+    },
+    {
+        "shopId": 2,
+        "name": "Fries",
+        "description": "Crispy golden fries",
+        "price": 15000
+    },
+    {
+        "shopId": 2,
+        "name": "Chicken Nuggets",
+        "description": "Crispy breaded chicken nuggets",
+        "price": 20000
+    },
+    {
+        "shopId": 2,
+        "name": "Milkshake",
+        "description": "Creamy milkshake in various flavors",
+        "price": 25000
+    },
+    {
+        "shopId": 2,
+        "name": "Onion Rings",
+        "description": "Golden-fried onion rings",
+        "price": 15000
+    },
+    {
+        "shopId": 3,
+        "name": "Chia Pudding",
+        "description": "Pudding with chia seeds and fruit",
+        "price": 40000
+    },
+    {
+        "shopId": 3,
+        "name": "Kale Smoothie",
+        "description": "Healthy green smoothie",
+        "price": 30000
+    },
+    {
+        "shopId": 3,
+        "name": "Fruit Bowl",
+        "description": "Freshly cut seasonal fruits",
+        "price": 35000
+    },
+    {
+        "shopId": 3,
+        "name": "Avocado Toast",
+        "description": "Toasted bread with mashed avocado",
+        "price": 30000
+    },
+    {
+        "shopId": 3,
+        "name": "Smoothie Bowl",
+        "description": "Mixed berry smoothie with toppings",
+        "price": 50000
+    },
+    {
+        "shopId": 4,
+        "name": "Turkey Sandwich",
+        "description": "Turkey breast with lettuce and tomato",
+        "price": 20000
+    },
+    {
+        "shopId": 4,
+        "name": "Chicken Wrap",
+        "description": "Grilled chicken wrap with veggies",
+        "price": 25000
+    },
+    {
+        "shopId": 4,
+        "name": "Club Sandwich",
+        "description": "Sandwich with layers of meat and veggies",
+        "price": 25000
+    },
+    {
+        "shopId": 4,
+        "name": "Bagel with Cream Cheese",
+        "description": "Toasted bagel with cream cheese",
+        "price": 20000
+    },
+    {
+        "shopId": 4,
+        "name": "Fruit Smoothie",
+        "description": "Mixed fruit smoothie",
+        "price": 30000
+    },
+    {
+        "shopId": 5,
+        "name": "Quinoa Salad",
+        "description": "Healthy salad with quinoa and veggies",
+        "price": 70000
+    },
+    {
+        "shopId": 5,
+        "name": "Vegan Burger",
+        "description": "Plant-based burger with lettuce",
+        "price": 60000
+    },
+    {
+        "shopId": 5,
+        "name": "Falafel Wrap",
+        "description": "Wrap with falafel and veggies",
+        "price": 40000
+    },
+    {
+        "shopId": 5,
+        "name": "Stuffed Peppers",
+        "description": "Peppers stuffed with quinoa and veggies",
+        "price": 50000
+    },
+    {
+        "shopId": 5,
+        "name": "Lentil Soup",
+        "description": "Warm soup with lentils and herbs",
+        "price": 30000
+    },
+    {
+        "shopId": 6,
+        "name": "Grilled Salmon",
+        "description": "Salmon grilled with herbs",
+        "price": 80000
+    },
+    {
+        "shopId": 6,
+        "name": "Shrimp Cocktail",
+        "description": "Shrimp with cocktail sauce",
+        "price": 60000
+    },
+    {
+        "shopId": 6,
+        "name": "Seafood Chowder",
+        "description": "Rich seafood chowder",
+        "price": 70000
+    },
+    {
+        "shopId": 7,
+        "name": "Pepperoni Pizza",
+        "description": "Pizza with pepperoni and cheese",
+        "price": 45000
+    },
+    {
+        "shopId": 7,
+        "name": "Garlic Knots",
+        "description": "Knotted dough with garlic and butter",
+        "price": 15000
+    },
+    {
+        "shopId": 7,
+        "name": "Minestrone Soup",
+        "description": "Classic Italian vegetable soup",
+        "price": 25000
+    },
+    {
+        "shopId": 8,
+        "name": "BBQ Burger",
+        "description": "Burger with BBQ sauce and cheese",
+        "price": 50000
+    },
+    {
+        "shopId": 8,
+        "name": "Mozzarella Sticks",
+        "description": "Fried cheese sticks",
+        "price": 20000
+    },
+    {
+        "shopId": 8,
+        "name": "Chocolate Milkshake",
+        "description": "Rich chocolate shake",
+        "price": 25000
+    },
+    {
+        "shopId": 9,
+        "name": "Dragon Roll",
+        "description": "Sushi roll with eel and avocado",
+        "price": 80000
+    },
+    {
+        "shopId": 9,
+        "name": "Miso Soup",
+        "description": "Traditional Japanese soup",
+        "price": 15000
+    },
+    {
+        "shopId": 9,
+        "name": "Sashimi Platter",
+        "description": "Assorted sashimi",
+        "price": 100000
+    },
+    {
+        "shopId": 10,
+        "name": "Burrito",
+        "description": "Filled with beans, rice, and meat",
+        "price": 40000
+    },
+    {
+        "shopId": 10,
+        "name": "Quesadilla",
+        "description": "Tortilla with cheese and fillings",
+        "price": 35000
+    },
+    {
+        "shopId": 10,
+        "name": "Nachos",
+        "description": "Tortilla chips with cheese and toppings",
+        "price": 30000
+    }
+]

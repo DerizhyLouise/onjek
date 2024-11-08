@@ -50,40 +50,6 @@ async function createOnCarOrder(req, res) {
 	}
 }
 
-async function getOnRideOrderByUserId(req, res) {
-	const { userId } = req.params;
-	try {
-		const order = await orderService.getOnRideOrderByUserId(userId);
-		if (!order) {
-			return res.status(404).json({ error: "Order not found" });
-		}
-		res.status(200).json({
-			message: "Successfully fetched order",
-			data: order,
-		});
-	} catch (error) {
-		console.error(error);
-		res.status(500).json({ error: "Internal server error" });
-	}
-}
-
-async function getOnCarOrderByUserId(req, res) {
-	const { userId } = req.params;
-	try {
-		const order = await orderService.getOnCarOrderByUserId(userId);
-		if (!order) {
-			return res.status(404).json({ error: "Order not found" });
-		}
-		res.status(200).json({
-			message: "Successfully fetched order",
-			data: order,
-		});
-	} catch (error) {
-		console.error(error);
-		res.status(500).json({ error: "Internal server error" });
-	}
-}
-
 async function completeOnRideOrder(req, res) {
 	const { orderId, userId } = req.query;
 	try {
@@ -110,7 +76,7 @@ async function completeOnCarOrder(req, res) {
 	const { orderId, userId } = req.query;
 	try {
 		const result = await orderService.completeOnCarOrder(orderId);
-		const order = await orderService.getOnCarOrderByUserId(userId);
+		const order = await orderService.getOnCarOrderByOrderId(orderId);
 		const account = await accountService.getAccountById(userId);
 		let price = 0;
 
@@ -142,8 +108,6 @@ async function completeOnCarOrder(req, res) {
 export default {
 	createOnRideOrder,
 	createOnCarOrder,
-	getOnRideOrderByUserId,
-	getOnCarOrderByUserId,
 	completeOnRideOrder,
 	completeOnCarOrder,
 };

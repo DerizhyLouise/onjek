@@ -165,7 +165,7 @@
       const departure = document.getElementById("departure").value;
       const capacity = document.getElementById("capacity").value;
 
-      const userId = sessionStorage.getItem("user_id");
+      const userId = sessionStorage.getItem("userId");
       const json = {
         startPoint: departure,
         endPoint: destination,
@@ -199,7 +199,7 @@
       event.preventDefault();
 
       try {
-        const userId = sessionStorage.getItem("user_id");
+        const userId = sessionStorage.getItem("userId");
         const orderId = document.getElementById("orderId").value;
         const response = await fetch(`http://localhost:3000/api/order/completeOnCarOrder?orderId=${orderId}&userId=${userId}`, {
           method: "PUT",

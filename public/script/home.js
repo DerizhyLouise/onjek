@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async function () {
-	const session = sessionStorage.getItem("user_id");
+	const session = sessionStorage.getItem("userId");
 	const response = await fetch(
 		`http://localhost:3000/api/account/getAccountByUserId/${session}`
 	);
@@ -24,11 +24,11 @@ document
 	});
 
 async function topupForm() {
-	const session = sessionStorage.getItem("user_id");
+	const session = sessionStorage.getItem("userId");
 	const nominal = document.getElementById("topupNominal").value;
 
 	let json = {
-		user_id: session,
+		userId: session,
 		balance: parseFloat(nominal),
 	};
 
@@ -48,12 +48,12 @@ async function topupForm() {
 }
 
 async function paymentForm() {
-	const session = sessionStorage.getItem("user_id");
+	const session = sessionStorage.getItem("userId");
 	const nominal = document.getElementById("nominal").value;
 	const accountCode = document.getElementById("transferCode").value;
 
 	let json = {
-		user_id: session,
+		userId: session,
 		nominal: parseFloat(nominal),
 		accountCode,
 	};
@@ -116,6 +116,6 @@ async function loadShops() {
 }
 
 function openProduct(shopId) {
-	sessionStorage.setItem("shop_id", shopId);
+	sessionStorage.setItem("shopId", shopId);
 	window.location.href = "product";
 }

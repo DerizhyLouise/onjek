@@ -71,6 +71,7 @@
               class="block w-full p-4 ps-10 text-sm text-gray-900 border border-black rounded-lg focus:outline-none"
               placeholder="Search for a departure..." value="Current Location" required />
           </div>
+          <div class="w-full mb-4">Price per Ride is Rp10000</div>
           <div class="flex justify-end">
             <button type="submit" data-modal-target="confirm-modal" data-modal-toggle="confirm-modal"
               class="border-2 border-darkgreen p-4 w-full rounded-lg hover:bg-darkgreen hover:text-white">
@@ -129,7 +130,7 @@
       const destination = document.getElementById("destination").value;
       const departure = document.getElementById("departure").value;
 
-      const userId = sessionStorage.getItem("user_id");
+      const userId = sessionStorage.getItem("userId");
       const json = {
         startPoint: departure,
         endPoint: destination,
@@ -162,7 +163,7 @@
       event.preventDefault();
 
       try {
-        const userId = sessionStorage.getItem("user_id");
+        const userId = sessionStorage.getItem("userId");
         const orderId = document.getElementById("orderId").value;
         const response = await fetch(`http://localhost:3000/api/order/completeOnRideOrder?orderId=${orderId}&userId=${userId}`, {
           method: "PUT",

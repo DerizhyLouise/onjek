@@ -18,7 +18,7 @@ async function getAccountByUserId(req, res) {
 }
 
 async function topup(req, res) {
-	const userId = req.body.user_id;
+	const userId = req.body.userId;
 	let balance = req.body.balance;
 	try {
 		const account = await accountService.getAccountById(userId);
@@ -36,7 +36,7 @@ async function topup(req, res) {
 }
 
 async function transfer(req, res) {
-	const userId = req.body.user_id;
+	const userId = req.body.userId;
 	let nominal = req.body.nominal;
 	let balance = req.body.nominal;
 	let accountCode = req.body.accountCode;

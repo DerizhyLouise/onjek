@@ -19,7 +19,7 @@ async function submitForm() {
 	for (let i in data) {
 		if (data[i].email === email && data[i].password === password) {
 			sessionStorage.clear();
-			sessionStorage.setItem("user_id", data[i].id);
+			sessionStorage.setItem("userId", data[i].id);
 			window.location.href = "/home";
 			validUserFound = true;
 			break;

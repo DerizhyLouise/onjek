@@ -12,7 +12,7 @@ tailwind.config = {
 	},
 };
 
-const session = sessionStorage.getItem("user_id");
+const session = sessionStorage.getItem("userId");
 if (
 	!session &&
 	!window.location.pathname.startsWith("/login") &&
